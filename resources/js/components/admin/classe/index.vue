@@ -86,7 +86,6 @@ export default {
     data () {
         return {
             dataClasse: [],
-            testclas:[],
             isLoading: false,
             currentPage: 1,
             perPage: 10,
@@ -116,17 +115,67 @@ export default {
             this.$refs.modal.showModal()
         },
         async getClasses(){
-            let urlapi = 'http://projet_mobile.test/api/classe';
+            let urlapi = 'http://127.0.0.1:8000/api/classe';
             await this.axios.get(urlapi).then(response=>{
                 this.dataClasse = response.data.listes_classes;
             }).catch((err) => {
                 throw err
             })
         },
+        async modifier (dataPat) {
+            /* transferer les données à la variable prop du modal */
+            this.$refs.modal.selectedTA = dataPat
+            this.$refs.modal.editMode = true
+            /* Modèle */
+            this.$refs.modal.showModal()
+        },
+
+        async supprimer (code) {
+            let statut;
+            Swal.fire({
+                title: 'Êtes-vous sûr?',
+                text: "Vous ne pourrez pas revenir en arrière!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, supprimez-le!'
+            }).then((result)=>{
+                if (result.value){
+                    let urlapi =  `http://127.0.0.1:8000/api/classe/${code}`
+                    this.axios.delete(urlapi)
+                        .then((response)=>{
+                            statut = response.data.status_code;
+                            if (statut == 200){
+                                Swal.fire(
+                                    'Supprimé!',
+                                    'Classe supprimé avec succes',
+                                    'success'
+                                )
+                                this.getClasses()
+                            }else {
+                                Swal.fire(
+                                    'Supprimé!',
+                                    'Erreur lors de la suppression',
+                                    'warning'
+                                )
+                                this.getClasses()
+                            }
+                        }).catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Un problème est survenu!',
+                            footer: '<a href>Pourquoi ai-je ce problème??</a>'
+                        })
+                    })
+                }
+            })
+        },
     },
     created() {
         this.getClasses();
-        Fire.$emit('creationok',()=>{
+        Fire.$on('creationok',()=>{
             this.getClasses();
         })
     }

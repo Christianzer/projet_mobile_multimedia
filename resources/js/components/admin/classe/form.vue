@@ -2,7 +2,7 @@
     <b-modal ref="my-modal" size="lg" :hide-footer="true" :title="title">
         <form  @submit.prevent="save">
             <div class="row">
-                <div v-if="editMode == false" class="col-md-6">
+                <div class="col-md-6">
                     <b-form-group
                         id="code"
                         label-cols-sm="4"
@@ -79,19 +79,20 @@ export default {
             this.$refs['my-modal'].hide()
         },
         async save(){
-            this.$Progress.start()
-            let  statut;
-            let urlapi = 'http://projet_mobile.test/api/classe';
-            await this.axios.post(urlapi,this.formData)
-                .then(response=>{
+            if (this.editMode === true){
+                this.$Progress.start()
+                let  statut;
+                let urlapi =  `http://127.0.0.1:8000/api/classe/${this.selectedTA.code}`;
+                await this.axios.put(urlapi,this.formData) .then(response=>{
                     statut = response.data.status_code;
+
                     if (statut == 200){
 
                         Fire.$emit('creationok'); //custom events
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Classe cree avec succes'
+                            title: 'Classe modifié avec succes'
                         })
 
                         this.$Progress.finish()
@@ -101,7 +102,7 @@ export default {
                     }else {
                         Toast.fire({
                             icon: 'error',
-                            title: 'Erreur  lors de la creation'
+                            title: 'Erreur lors de la modification'
                         })
                         this.$Progress.finish()
                         this.closeModal()
@@ -109,6 +110,39 @@ export default {
                 }).catch((err) => {
                     throw err
                 })
+            }else {
+                this.$Progress.start()
+                let  statut;
+                let urlapi = 'http://127.0.0.1:8000/api/classe';
+                await this.axios.post(urlapi,this.formData)
+                    .then(response=>{
+                        statut = response.data.status_code;
+
+                        if (statut == 200){
+
+                            Fire.$emit('creationok'); //custom events
+
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Classe crée avec succes'
+                            })
+
+                            this.$Progress.finish()
+
+                            this.closeModal()
+
+                        }else {
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Erreur  lors de la creation'
+                            })
+                            this.$Progress.finish()
+                            this.closeModal()
+                        }
+                    }).catch((err) => {
+                        throw err
+                    })
+            }
 
         }
 

@@ -79,6 +79,7 @@ class ClasseController extends Controller
     {
         //
         $update = Classes::find($code);
+        $update->code = $request->code;
         $update->libelle = $request->libelle;
         $saved = (bool) $update->save();
         if ($saved) {
