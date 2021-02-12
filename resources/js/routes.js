@@ -10,6 +10,9 @@ export const routes = [
         name:'classe',
         path:'/classe',
         component:classe
+    },
+    {
+
     }
 
 
