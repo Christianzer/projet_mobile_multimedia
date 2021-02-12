@@ -14,4 +14,8 @@ class Classes extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $guarded = 'code';
+
+    public function classe_etudiant(){
+        return $this->hasMany(Etudiant::class,'codecl','code');
+    }
 }
