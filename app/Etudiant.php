@@ -9,7 +9,7 @@ class Etudiant extends Model
     //
     protected $table = 'etudiants';
     protected $primaryKey = 'matricule';
-    protected $fillable = ['matricule','nom','prenoms','date_naissance','genre','nationalite','codecl'];
+    protected $fillable = ['matricule','nom','prenoms','contact','email','codecl'];
     public $timestamps= false;
     protected $casts =["matricule"=>"string"];
     public $incrementing = false;

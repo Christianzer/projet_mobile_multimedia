@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Etudiant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,11 @@ class EtudiantControllers extends Controller
     public function index()
     {
         //
+        $listes = Etudiant::with('etudiant_classe')->paginate(10);
+        return response()->json([
+            'status_code' => 200,
+            'listes' =>$listes
+        ]);
     }
 
     /**

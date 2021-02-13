@@ -17,10 +17,8 @@ class CreateEtudiantsTable extends Migration
             $table->string('matricule')->primary();
             $table->string('nom', 45);
             $table->string('prenoms', 255);
-            $table->string('date_naissance');
-            $table->string('genre');
-            $table->string('nationalite');
-            $table->string('codecl');
+            $table->string('contact');
+            $table->string('email');
             $table->timestamps();
         });
     }

@@ -69,11 +69,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span class="text-uppercase">Gestion des etudiants</span>
                 </a>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+                <div class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <router-link class="collapse-item" to="/etudiant">Etudiant</router-link>
                         <router-link class="collapse-item" to="/utilisateur_etudiant">Utilisateur Etudiant</router-link>
@@ -82,11 +82,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" aria-controls="collapse3">
                     <i class="fas fa-fw fa-cog"></i>
                     <span class="text-uppercase">Gestion des messages</span>
                 </a>
-                <div id="collapse3" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+                <div class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <router-link class="collapse-item" to="/sms">Message par sms</router-link>
                         <router-link class="collapse-item" to="/mail">Message par mail</router-link>

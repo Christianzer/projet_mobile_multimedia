@@ -13,7 +13,7 @@
                     >
                         <b-form-input
                             v-model.trim="formData.code"
-                            class="w-auto"
+                            class="w-auto text-uppercase"
                             id="code"
                         ></b-form-input>
                     </b-form-group>
@@ -28,7 +28,7 @@
                         label-for="input-horizontal"
                     >
                         <b-form-input
-                            class="w-auto"
+                            class="w-auto text-uppercase"
                             type="text"
                             v-model.trim="formData.libelle"
                         ></b-form-input>
