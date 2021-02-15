@@ -69,29 +69,17 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" aria-controls="collapseTwo">
+                <router-link class="nav-link collapsed" to="/etudiant">
                     <i class="fas fa-fw fa-cog"></i>
                     <span class="text-uppercase">Gestion des etudiants</span>
-                </a>
-                <div class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <router-link class="collapse-item" to="/etudiant">Etudiant</router-link>
-                        <router-link class="collapse-item" to="/utilisateur_etudiant">Utilisateur Etudiant</router-link>
-                    </div>
-                </div>
+                </router-link>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="true" aria-controls="collapse3">
+                <router-link class="nav-link collapsed" to="/message">
                     <i class="fas fa-fw fa-cog"></i>
                     <span class="text-uppercase">Gestion des messages</span>
-                </a>
-                <div class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <router-link class="collapse-item" to="/sms">Message par sms</router-link>
-                        <router-link class="collapse-item" to="/mail">Message par mail</router-link>
-                    </div>
-                </div>
+                </router-link>
             </li>
 
 

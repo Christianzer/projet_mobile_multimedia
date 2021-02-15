@@ -18,18 +18,8 @@ export const routes = [
         component:etudiant
     },
     {
-        name:'utilisateur_etudiant',
-        path:'/utilisateur_etudiant',
-        component:classe
-    },
-    {
-        name:'message_sms',
-        path:'/sms',
-        component:classe
-    },
-    {
-        name:'message_mail',
-        path:'/mail',
+        name:'message',
+        path:'/message',
         component:classe
     }
 

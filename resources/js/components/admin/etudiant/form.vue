@@ -64,7 +64,7 @@
                         <b-form-input
                             class="w-auto"
                             type="text"
-                            v-model.trim="formData.nom"
+                            v-model.trim="formData.contact"
                         ></b-form-input>
                     </b-form-group>
                 </div>
@@ -82,7 +82,7 @@
                         <b-form-input
                             type="email"
                             v-model.trim="formData.email"
-                            class="w-auto text-uppercase"
+                            class="w-auto"
                             id="code"
                         ></b-form-input>
                     </b-form-group>
@@ -103,6 +103,24 @@
                             text-field="libelle"
                             v-model.trim="formData.codecl"
                         ></b-form-select>
+                    </b-form-group>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <b-form-group
+                        id="code"
+                        label-cols-sm="4"
+                        label-cols-lg="3"
+                        description="Mot de passe etudiant"
+                        label="Mot de passe"
+                        label-for="input-horizontal"
+                    >
+                        <b-form-input
+                            v-model.trim="formData.mot_de_passe"
+                            class="w-auto"
+                            id="code"
+                        ></b-form-input>
                     </b-form-group>
                 </div>
             </div>
@@ -138,6 +156,7 @@ export default {
                 prenoms:'',
                 contact:'',
                 email:'',
+                mot_de_passe:'',
                 codecl:''
             },
             isloading: false
@@ -159,6 +178,7 @@ export default {
                 this.formData.contact = null
                 this.formData.email = null
                 this.formData.codecl = null
+                this.formData.mot_de_passe = null
             }
             this.$refs['my-modal'].show()
         },
@@ -180,11 +200,9 @@ export default {
                 let urlapi =  `http://127.0.0.1:8000/api/etudiant/${this.selectedTA.matricule}`;
                 await this.axios.put(urlapi,this.formData) .then(response=>{
                     statut = response.data.status_code;
-
                     if (statut == 200){
 
                         Fire.$emit('creationok'); //custom events
-
                         Toast.fire({
                             icon: 'success',
                             title: 'Etudiant modifié avec succes'

@@ -113,8 +113,13 @@ export default {
                     sortable: true
                 },
                 {
-                    key: 'codecl',
+                    key: 'etudiant_classe.libelle',
                     label:'Classe',
+                    sortable: true
+                },
+                {
+                    key: 'etudiant_utilisateur.mot_de_passe',
+                    label: 'Mot de passe',
                     sortable: true
                 },
                 {
@@ -134,7 +139,8 @@ export default {
         async getClasses(){
             let urlapi = 'http://127.0.0.1:8000/api/etudiant';
             await this.axios.get(urlapi).then(response=>{
-                this.dataEtudiant = response.data.listes;
+                this.dataEtudiant = response.data.listes.data;
+                console.log(this.dataEtudiant)
             }).catch((err) => {
                 throw err
             })

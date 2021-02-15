@@ -19,6 +19,7 @@ class CreateEtudiantsTable extends Migration
             $table->string('prenoms', 255);
             $table->string('contact');
             $table->string('email');
+            $table->string('codecl');
             $table->timestamps();
         });
     }

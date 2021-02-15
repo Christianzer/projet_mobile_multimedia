@@ -19,4 +19,8 @@ class Etudiant extends Model
     public function etudiant_classe(){
         return $this->belongsTo(Classes::class,'codecl','code');
     }
+
+    public function etudiant_utilisateur(){
+        return $this->belongsTo(Utilisateur::class,'matricule','matricule');
+    }
 }
