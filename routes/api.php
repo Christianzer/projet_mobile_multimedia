@@ -22,3 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('classe', 'API\ClasseController');
 Route::apiResource('etudiant', 'API\EtudiantControllers');
+Route::get('message','API\MessageController@listMessage');
+Route::post('message','API\MessageController@sendMessage');

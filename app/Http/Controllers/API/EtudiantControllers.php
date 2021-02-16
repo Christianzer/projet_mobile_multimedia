@@ -34,7 +34,7 @@ class EtudiantControllers extends Controller
     public function store(Request $request)
     {
         //
-        $matricule = (!empty($request->matricule)) ? $request->matricule : Str::random();
+        $matricule = (!empty($request->matricule)) ? $request->matricule : Str::random('4');
         $etudiant = new Etudiant();
         $etudiant->matricule = $matricule;
         $etudiant->nom = $request->nom;
@@ -88,7 +88,9 @@ class EtudiantControllers extends Controller
      */
     public function update(Request $request, $matricule)
     {
+
         //
+
         $etudiant = Etudiant::find($matricule);
         $etudiant->matricule = $request->matricule;
         $etudiant->nom = $request->nom;
@@ -96,7 +98,7 @@ class EtudiantControllers extends Controller
         $etudiant->email = $request->email;
         $etudiant->contact = $request->contact;
         $etudiant->codecl = $request->codecl;
-        $saved = (bool) $etudiant->save();
+        $saved = (bool)$etudiant->save();
         if ($saved) {
             $utilisateur = Utilisateur::find($matricule);
             $utilisateur->matricule = $matricule;

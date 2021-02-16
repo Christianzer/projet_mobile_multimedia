@@ -1,5 +1,5 @@
 <template>
-    <b-modal ref="my-modal" size="lg" :hide-footer="true" :title="title">
+    <b-modal ref="my-modal" size="xl" :hide-footer="true" :title="title">
         <form  @submit.prevent="save">
             <div class="row">
                 <div class="col-md-6">
@@ -13,7 +13,7 @@
                     >
                         <b-form-input
                             v-model.trim="formData.matricule"
-                            class="w-auto text-uppercase"
+                            class="w-50 text-uppercase"
                             id="code"
                         ></b-form-input>
                     </b-form-group>
@@ -28,7 +28,7 @@
                         label-for="input-horizontal"
                     >
                         <b-form-input
-                            class="w-auto text-uppercase"
+                            class="w-75 text-uppercase"
                             type="text"
                             v-model.trim="formData.nom"
                         ></b-form-input>
@@ -47,7 +47,7 @@
                     >
                         <b-form-input
                             v-model.trim="formData.prenoms"
-                            class="w-auto text-uppercase"
+                            class="text-uppercase"
                             id="code"
                         ></b-form-input>
                     </b-form-group>
@@ -62,7 +62,7 @@
                         label-for="input-horizontal"
                     >
                         <b-form-input
-                            class="w-auto"
+                            class="w-75"
                             type="text"
                             v-model.trim="formData.contact"
                         ></b-form-input>
@@ -82,7 +82,6 @@
                         <b-form-input
                             type="email"
                             v-model.trim="formData.email"
-                            class="w-auto"
                             id="code"
                         ></b-form-input>
                     </b-form-group>
@@ -97,7 +96,7 @@
                         label-for="input-horizontal"
                     >
                         <b-form-select
-                            class="text-uppercase"
+                            class="w-50 text-uppercase"
                             :options="dataClasse"
                             value-field="code"
                             text-field="libelle"
@@ -171,6 +170,7 @@ export default {
                 this.formData.contact = this.selectedTA.contact
                 this.formData.email = this.selectedTA.email
                 this.formData.codecl = this.selectedTA.codecl
+                this.formData.mot_de_passe = this.selectedTA.etudiant_utilisateur.mot_de_passe
             } else {
                 this.formData.matricule = null
                 this.formData.nom = null

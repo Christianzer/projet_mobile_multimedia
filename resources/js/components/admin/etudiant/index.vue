@@ -21,6 +21,7 @@
                     head-variant="light"
                     bordered
                     hover
+                    responsive="xl"
                     :busy="isLoading"
                     :items="dataEtudiant"
                     :fields="fields"
@@ -146,6 +147,7 @@ export default {
             })
         },
         async modifier (dataPat) {
+            console.log(dataPat)
             /* transferer les données à la variable prop du modal */
             this.$refs.modal.selectedTA = dataPat
             this.$refs.modal.editMode = true
