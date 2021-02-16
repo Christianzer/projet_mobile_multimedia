@@ -12,7 +12,7 @@ class Message extends Model
 
 
 
-    public function etudiant_message(){
-        return $this->belongsTo(Message::class,'matricule','matricule');
+    public function message_etudiant(){
+        return $this->belongsTo(Etudiant::class,'matricule','matricule');
     }
 }

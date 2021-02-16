@@ -32,7 +32,19 @@
                             <strong>Chargement...</strong>
                         </div>
                     </template>
-
+                    <template v-slot:cell(message_etudiant)="row">
+                        {{row.item.message_etudiant.nom}} {{row.item.message_etudiant.prenoms}}
+                    </template>
+                    <template v-slot:cell(type_message)="row">
+                        <span
+                            v-if="row.item.type_message === 1"
+                            class="badge badge-danger rounded-0"
+                        >EMAIL</span
+                        >
+                        <span v-else class="badge badge-success rounded-0"
+                        >SMS</span
+                        >
+                    </template>
                     <template slot="code" slot-scope="data">
                         {{ data.item.code | truncate(30) }}
                     </template>
@@ -78,10 +90,8 @@ export default {
                 },
                 {
                     key: 'message_etudiant',
+                    label:'Destinataire',
                     sortable: true
-                },
-                {
-                    key: 'actions'
                 }
             ]
         }

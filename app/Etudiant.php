@@ -24,7 +24,8 @@ class Etudiant extends Model
         return $this->belongsTo(Utilisateur::class,'matricule','matricule');
     }
 
-    public function message_etudiant(){
+
+    public function etudiant_message(){
         return $this->hasMany(Message::class,'matricule','matricule');
     }
 }
