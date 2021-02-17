@@ -23,6 +23,8 @@ class MessageController extends Controller
     }
 
     public function sendMessage(Request $request){
+        //Mail
+        $etudiant = Etudiant::find($request->matricule);
         try {
             $mail = new PHPMailer();
             $mail->isSMTP();
@@ -33,16 +35,18 @@ class MessageController extends Controller
             $mail->isHTML();
             $mail->Username = 'devchristianaka@gmail.com';
             $mail->Password = 'DevAka20*';
-            $mail->SetFrom('elimco02@gmail.com');
-            $mail->Subject = 'test';
-            $mail->Body = 'test';
-            $mail->AddAddress('elimco02@gmail.com');
+            $mail->SetFrom($etudiant['email']);
+            $mail->Subject = $request->objet;
+            $mail->Body = $request->message;
+            $mail->AddAddress($etudiant['email']);
             $mail->Send();
-            echo 'Message envoye';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-        /*
+
+        //Sms
+
+
         $message = new Message();
         $message->objet = $request->objet;
         $message->type_message = $request->type_message;
@@ -60,7 +64,9 @@ class MessageController extends Controller
                 'message' => 'Echec'
             ], 400);
         }
-        */
+
+
+
     }
 
 }
