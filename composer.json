@@ -12,8 +12,11 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
+        "ismaeltoe/osms": "^2.0",
         "laravel/framework": "^7.29",
+        "laravel/nexmo-notification-channel": "^2.5",
         "laravel/tinker": "^2.5",
+        "nexmo/laravel": "^2.4",
         "phpmailer/phpmailer": "^6.2"
     },
     "require-dev": {
