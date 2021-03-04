@@ -24,3 +24,4 @@ Route::apiResource('classe', 'API\ClasseController');
 Route::apiResource('etudiant', 'API\EtudiantControllers');
 Route::get('message','API\MessageController@listMessage');
 Route::post('message','API\MessageController@sendMessage');
+Route::post('login','API\LoginControllers@connexion');
