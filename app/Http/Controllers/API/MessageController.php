@@ -27,9 +27,7 @@ class MessageController extends Controller
 
     public function sendMessage(Request $request)
     {
-        var_dump($request);
-        //Mail
-        /*
+
         if ($request->element == 1) {
             $etudiant = Etudiant::find($request->matricule);
             $idtype = (int)$request->type_message;
@@ -126,41 +124,84 @@ class MessageController extends Controller
                 }
             }
             //Sms
-
         }else{
             $reset = DB::table('etudiants')
                 ->where('codecl','=',$request->matricule)
                 ->get();
-            foreach ($reset as $etd):
-                $idtype = (int)$request->type_message;
-            var_dump($idtype);
-            var_dump($etd);
-            var_dump($etd['email']);
-            var_dump($etd['contact']);
-                /*
-                $idtype = (int)$request->type_message;
-                if ($idtype == 1) {
-                    try {
-                        $mail = new PHPMailer();
-                        $mail->isSMTP();
-                        $mail->SMTPAuth = true;
-                        $mail->SMTPSecure = 'ssl';
-                        $mail->Host = 'smtp.gmail.com';
-                        $mail->Port = '465';
-                        $mail->isHTML();
-                        $mail->Username = 'devchristianaka@gmail.com';
-                        $mail->Password = 'DevAka20*';
-                        $mail->SetFrom($etd['email']);
+            $idtype = (int)$request->type_message;
+            if ($idtype == 1) {
+                try {
+                    $mail = new PHPMailer();
+                    $mail->isSMTP();
+                    $mail->SMTPAuth = true;
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->Port = '465';
+                    $mail->isHTML();
+                    $mail->Username = 'devchristianaka@gmail.com';
+                    $mail->Password = 'DevAka20*';
+                    foreach ($reset as $etd):
+                        $mail->SetFrom($etd->email);
                         $mail->Subject = $request->objet;
                         $mail->Body = $request->message;
-                        $mail->AddAddress($etd['email']);
+                        $mail->AddAddress($etd->email);
                         $mail->Send();
                         $message = new Message();
                         $message->objet = $request->objet;
                         $message->type_message = $request->type_message;
                         $message->message = $request->message;
-                        $message->matricule = $request->matricule;
+                        $message->matricule = $etd->matricule;
                         $saved = (bool) $message->save();
+                    endforeach;
+                    if ($saved) {
+                        return response()->json([
+                            'status_code' => 200,
+                            'message' => 'success'
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status_code' => 400,
+                            'message' => 459
+                        ]);
+                    }
+
+                } catch (Exception $e) {
+                    return response()->json([
+                        'status_code' => 400,
+                        'message' => 458
+                    ]);
+                }
+
+            }
+            else
+            {
+                $config = array(
+                    'clientId' => 'Y6m0PnbSqTrVJBCOEH89bDhnjg1iij1D',
+                    'clientSecret' => '00XehbQoDlhR8aS5'
+                );
+
+                $sms = new Osms($config);
+
+                // retrieve an access token
+                $response = $sms->getTokenFromConsumerKey();
+
+                if (!empty($response['access_token'])) {
+                    $senderAddress = 'tel:+225';
+                    foreach ($reset as $etd):
+                        $receiverAddress = 'tel:+225'.$etd->contact;
+                        $message = $request->message;
+                        $senderName = 'Dev Topark';
+                        $test = $sms->sendSMS($senderAddress, $receiverAddress, $message, $senderName);
+                    endforeach;
+                    if (empty($test['error'])) {
+                        $message = new Message();
+                        foreach ($reset as $etd):
+                            $message->objet = $request->objet;
+                            $message->type_message = $request->type_message;
+                            $message->message = $request->message;
+                            $message->matricule = $etd->matricule;
+                            $saved = (bool) $message->save();
+                        endforeach;
                         if ($saved) {
                             return response()->json([
                                 'status_code' => 200,
@@ -169,72 +210,27 @@ class MessageController extends Controller
                         } else {
                             return response()->json([
                                 'status_code' => 400,
-                                'message' => 459
+                                'message' => 'Echec'
                             ]);
                         }
-
-                    } catch (Exception $e) {
-                        return response()->json([
-                            'status_code' => 400,
-                            'message' => 458
-                        ]);
-                    }
-                }
-                else
-                {
-                    $config = array(
-                        'clientId' => 'Y6m0PnbSqTrVJBCOEH89bDhnjg1iij1D',
-                        'clientSecret' => '00XehbQoDlhR8aS5'
-                    );
-
-                    $sms = new Osms($config);
-
-                    // retrieve an access token
-                    $response = $sms->getTokenFromConsumerKey();
-
-                    if (!empty($response['access_token'])) {
-                        $senderAddress = 'tel:+225';
-                        $receiverAddress = 'tel:+225'.$etd['contact'];
-                        $message = $request->message;
-                        $senderName = 'Dev Topark';
-                        $test = $sms->sendSMS($senderAddress, $receiverAddress, $message, $senderName);
-                        if (empty($test['error'])) {
-                            $message = new Message();
-                            $message->objet = $request->objet;
-                            $message->type_message = $request->type_message;
-                            $message->message = $request->message;
-                            $message->matricule = $request->matricule;
-                            $saved = (bool) $message->save();
-                            if ($saved) {
-                                return response()->json([
-                                    'status_code' => 200,
-                                    'message' => 'success'
-                                ]);
-                            } else {
-                                return response()->json([
-                                    'status_code' => 400,
-                                    'message' => 'Echec'
-                                ]);
-                            }
-                        } else {
-                            return response()->json([
-                                'status_code' => 400,
-                                'message' => 456
-                            ]);
-                        }
-
                     } else {
-
                         return response()->json([
                             'status_code' => 400,
-                            'message' => 457
+                            'message' => 456
                         ]);
                     }
-                }
 
-            endforeach;
+                } else {
+
+                    return response()->json([
+                        'status_code' => 400,
+                        'message' => 457
+                    ]);
+                }
+            }
+
 
         }
-        */
+
     }
 }

@@ -141,36 +141,36 @@ export default {
         },
 
         async save(){
-            /*
+
             this.$Progress.start()
             let  statut;
-            */
+
             console.log(this.formData)
             let urlapi = 'http://127.0.0.1:8000/api/message';
             await this.axios.post(urlapi,this.formData)
-            /*
-            .then(response=>{
-                statut = response.data.status_code;
-                if (statut == 200){
-                    Fire.$emit('creationok'); //custom events
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Message envoyé avec succes'
-                    })
-                    this.$Progress.finish()
-                    this.closeModal()
-                }else {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Erreur'
-                    })
-                    this.$Progress.finish()
-                    this.closeModal()
-                }
-            }).catch((err) => {
-                throw err
-            })
-             */
+
+                .then(response=>{
+                    statut = response.data.status_code;
+                    if (statut == 200){
+                        Fire.$emit('creationok'); //custom events
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Message envoyé avec succes'
+                        })
+                        this.$Progress.finish()
+                        this.closeModal()
+                    }else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Erreur'
+                        })
+                        this.$Progress.finish()
+                        this.closeModal()
+                    }
+                }).catch((err) => {
+                    throw err
+                })
+
 
 
         }

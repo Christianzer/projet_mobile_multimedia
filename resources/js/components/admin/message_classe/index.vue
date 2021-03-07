@@ -33,7 +33,7 @@
                         </div>
                     </template>
                     <template v-slot:cell(message_etudiant)="row">
-                        {{row.item.message_etudiant.nom}} {{row.item.message_etudiant.prenoms}}
+                        {{row.item.message_etudiant.codecl}}
                     </template>
                     <template v-slot:cell(type_message)="row">
                         <span
