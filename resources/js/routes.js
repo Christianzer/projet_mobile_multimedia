@@ -1,7 +1,8 @@
 import admin from './components/admin/index.vue'
 import classe from './components/admin/classe/index.vue'
 import etudiant from './components/admin/etudiant/index.vue'
-import message from './components/admin/message/index.vue'
+import message_etudiant from './components/admin/message_et/index.vue'
+import message_classe from './components/admin/message_classe/index.vue'
 export const routes = [
     {
         name:'home',
@@ -19,9 +20,14 @@ export const routes = [
         component:etudiant
     },
     {
-        name:'message',
-        path:'/message',
-        component:message
+        name:'message_etudiant',
+        path:'/message_etudiant',
+        component:message_etudiant
+    },
+    {
+        name:'message_classe',
+        path:'/message_classe',
+        component:message_classe
     }
 
 

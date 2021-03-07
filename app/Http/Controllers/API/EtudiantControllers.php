@@ -45,7 +45,7 @@ class EtudiantControllers extends Controller
         $saved = (bool) $etudiant->save();
         if ($saved) {
             $utilisateur = new Utilisateur();
-            $utilisateur->code = Str::random();
+            $utilisateur->code = Str::random('4');
             $utilisateur->matricule = $matricule;
             $utilisateur->mot_de_passe = $request->mot_de_passe;
             $voir = (bool)$utilisateur->save();

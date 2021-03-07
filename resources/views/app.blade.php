@@ -76,9 +76,17 @@
             </li>
 
             <li class="nav-item">
-                <router-link class="nav-link collapsed" to="/message">
+                <router-link class="nav-link collapsed" to="/message_etudiant">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span class="text-uppercase">Gestion des messages</span>
+                    <span class="text-uppercase">Gestion message etudiant</span>
+                </router-link>
+            </li>
+
+
+            <li class="nav-item">
+                <router-link class="nav-link collapsed" to="/message_classe">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span class="text-uppercase">Gestion message classe</span>
                 </router-link>
             </li>
 
