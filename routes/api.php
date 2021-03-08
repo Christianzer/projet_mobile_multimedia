@@ -26,3 +26,5 @@ Route::get('message','API\MessageController@listMessage');
 Route::post('message','API\MessageController@sendMessage');
 Route::post('login','API\LoginControllers@connexion');
 Route::get('getclasse','API\LoginControllers@getClasse');
+Route::get('getsp','API\CompteControllers@nbreCalculer');
+
