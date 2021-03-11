@@ -32,8 +32,8 @@
                             <strong>Chargement...</strong>
                         </div>
                     </template>
-                    <template v-slot:cell(message_etudiant)="row">
-                        {{row.item.message_etudiant.nom}} {{row.item.message_etudiant.prenoms}}
+                    <template v-slot:cell(matricule)="row">
+                        {{row.item.nom}} {{row.item.prenoms}}
                     </template>
                     <template v-slot:cell(type_message)="row">
                         <span
@@ -89,7 +89,7 @@ export default {
                     sortable: true
                 },
                 {
-                    key: 'message_etudiant',
+                    key: 'matricule',
                     label:'Destinataire',
                     sortable: true
                 }
@@ -107,7 +107,7 @@ export default {
         async getMessage(){
             let urlapi = 'http://127.0.0.1:8000/api/message';
             await this.axios.get(urlapi).then(response=>{
-                this.dataMessage = response.data.listes.data;
+                this.dataMessage = response.data.listes;
                 console.log(this.dataMessage)
             }).catch((err) => {
                 throw err

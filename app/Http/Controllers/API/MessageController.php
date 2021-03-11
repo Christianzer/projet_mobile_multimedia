@@ -18,7 +18,11 @@ class MessageController extends Controller
     public function listMessage()
     {
 
-        $listes = Message::with('message_etudiant')->paginate();
+        $listes = DB::table('messages')
+            ->where('messages.matricule','<>','SPUFR')
+            ->join('etudiants','etudiants.matricule','=','messages.matricule')
+            ->select('*')
+            ->get();
         return response()->json([
             'status_code' => 200,
             'listes' => $listes

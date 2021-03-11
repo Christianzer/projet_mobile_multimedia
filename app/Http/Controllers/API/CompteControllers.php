@@ -27,6 +27,22 @@ class CompteControllers extends Controller
 
 
     public function messageet($matricule){
-        $nbremesrecusp = DB::table('messages')->where('matricule','=',$matricule)->count('id');
+        $nbremesrecusp = DB::table('messages')->where('matricule','=',$matricule)->select('*')->get();
+        return response()->json([
+            'status_code' => 200,
+            'listes' =>$nbremesrecusp
+        ]);
+    }
+
+    public function etudianttout(){
+        $etudiant = DB::table('etudiants')
+            ->join('classes','classes.code','=','etudiants.codecl')
+            ->join('utilisateurs','utilisateurs.matricule','=','etudiants.matricule')
+            ->select('*')
+            ->get();
+        return response()->json([
+            'status_code' => 200,
+            'listes' =>$etudiant
+        ]);
     }
 }

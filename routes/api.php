@@ -27,4 +27,7 @@ Route::post('message','API\MessageController@sendMessage');
 Route::post('login','API\LoginControllers@connexion');
 Route::get('getclasse','API\LoginControllers@getClasse');
 Route::get('getsp','API\CompteControllers@nbreCalculer');
+Route::get('getEtudiant','API\CompteControllers@etudianttout');
+Route::get('messageSp/{matricule}','API\CompteControllers@messageet');
+
 
