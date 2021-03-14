@@ -4,9 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Etudiant;
 use App\Http\Controllers\Controller;
+use App\Message;
 use App\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Osms\Osms;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class EtudiantControllers extends Controller
 {
@@ -49,7 +52,47 @@ class EtudiantControllers extends Controller
             $utilisateur->matricule = $matricule;
             $utilisateur->mot_de_passe = $request->mot_de_passe;
             $voir = (bool)$utilisateur->save();
+            $bodymessage = 'Votre matricule est :'.$matricule.' Votre mot de passe est :'.$request->mot_de_passe;
             if ($voir){
+                $mail = new PHPMailer();
+                $mail->isSMTP();
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'ssl';
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Port = '465';
+                $mail->isHTML();
+                $mail->Username = 'devchristianaka@gmail.com';
+                $mail->Password = 'DevAka20*';
+                $mail->SetFrom($request->email);
+                $mail->Subject = 'IDENTIFIANT PLATEFORME MOBILE';
+                $mail->Body = $bodymessage;
+                $mail->AddAddress($request->email);
+                $mail->Send();
+
+                $config = array(
+                    'token' => 'your_access_token'
+                );
+                $osms = new Osms($config);
+                $senderAddress = 'tel:+225';
+                $receiverAddress = 'tel:+225'.$request->contact;
+                $message = $bodymessage;
+                $senderName = 'Dev Topark';
+                $osms->sendSMS($senderAddress, $receiverAddress, $message, $senderName);
+
+                $message = new Message();
+                $message->objet = 'IDENTIFIANT PLATEFORME MOBILE';
+                $message->type_message = 1;
+                $message->message = $bodymessage;
+                $message->matricule = $matricule;
+                $message->save();
+
+                $message2 = new Message();
+                $message2->objet = 'IDENTIFIANT PLATEFORME MOBILE';
+                $message2->type_message = 2;
+                $message2->message = $bodymessage;
+                $message2->matricule = $matricule;
+                $message2->save();
+
                 return response()->json([
                     'status_code' => 200,
                     'message' => 'success'

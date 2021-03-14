@@ -32,7 +32,8 @@ class LoginControllers extends Controller
                 return response($resultJson, 200);
             }elseif ($result[0]->type_utilisateur==1){
                 $resultat = DB::table("etudiants")
-                    ->where('matricule','=',$identifiant)
+                    ->join('utilisateurs','utilisateurs.matricule','=','etudiants.matricule')
+                    ->where('etudiants.matricule','=',$identifiant)
                     ->select('*')->get();
                 $resultJson = $resultat->toJson(JSON_PRETTY_PRINT);
                 return response($resultJson, 200);
