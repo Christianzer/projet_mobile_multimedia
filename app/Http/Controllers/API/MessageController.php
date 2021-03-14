@@ -84,7 +84,7 @@ class MessageController extends Controller
                 );
 
                 $osms = new Osms($config);
-                $senderAddress = 'tel:+225';
+                $senderAddress = 'tel:+225010101';
                 $receiverAddress = 'tel:+225'.$etudiant['contact'];
                 $message = $request->message;
                 $senderName = 'Dev Topark';
@@ -162,7 +162,7 @@ class MessageController extends Controller
                     'token' => 'your_access_token'
                 );
                 $osms = new Osms($config);
-                $senderAddress = 'tel:+225';
+                $senderAddress = 'tel:+225010101';
                 foreach ($reset as $etd):
                     $receiverAddress = 'tel:+225'.$etd->contact;
                     $message = $request->message;
