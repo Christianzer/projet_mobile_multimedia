@@ -83,10 +83,10 @@ class EtudiantControllers extends Controller
                     ]);
                 }
                 $config = array(
-                    'token' => 'your_access_token'
+                    'token' => '65Q2q4gKGPNoPLmLNq1iAyllTYnF'
                 );
                 $osms = new Osms($config);
-                $senderAddress = 'tel:+225010101';
+                $senderAddress = 'tel:+2250707968407';
                 $receiverAddress = 'tel:+225'.$request->contact;
                 $message = $bodymessage;
                 $senderName = 'Dev Topark';
