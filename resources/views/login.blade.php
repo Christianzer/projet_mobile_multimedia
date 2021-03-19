@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="bg-gradient-success">
+<body class="bg-gradient-primary">
 
 <div class="container">
 
@@ -42,7 +42,7 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">BIENVENUE MR LE SECRETAIRE PRINCIPAL</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">BIENVENUE</h1>
                                 </div>
                                 <form class="user" method="post" action="{{route('admin.login')}}">
                                     @csrf
