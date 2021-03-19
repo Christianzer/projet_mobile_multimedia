@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="{{asset('assets/img/edu1.png')}}">
 
     <title>Projet Mobile Multimedia - Login</title>
 
@@ -22,9 +23,11 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
 
 <div class="container">
+
+
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -39,22 +42,31 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">BIENVENUE MR LE SECRETAIRE PRINCIPAL</h1>
                                 </div>
-                                <form class="user">
+                                <form class="user" method="post" action="{{route('admin.login')}}">
+                                    @csrf
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user"
+                                        <input type="text" name="email" class="form-control form-control-user"
                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                               placeholder="Enter Email Address...">
+                                               placeholder="Entrer votre matricule...">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" name="pass" class="form-control form-control-user"
+                                               id="exampleInputPassword" placeholder="Entrer votre mot de passe">
                                     </div>
-                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                        Login
-                                    </a>
+                                    <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">
+                                        CONNEXION
+                                    </button>
                                     <hr>
+                                    @if(Session::has('success'))
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <strong>{{ Session::get('success') }}</strong>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @endif
                                 </form>
                             </div>
                         </div>

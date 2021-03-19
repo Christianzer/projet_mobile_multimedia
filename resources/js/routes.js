@@ -3,9 +3,11 @@ import classe from './components/admin/classe/index.vue'
 import etudiant from './components/admin/etudiant/index.vue'
 import message_etudiant from './components/admin/message_et/index.vue'
 import message_classe from './components/admin/message_classe/index.vue'
+
 export const routes = [
+
     {
-        name:'home',
+        name:'admin',
         path:'/',
         component:admin
     },

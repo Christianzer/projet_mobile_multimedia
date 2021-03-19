@@ -17,7 +17,12 @@ Route::get('/', function () {
     return view('app');
 });
 */
+Route::get('/', function () {
+    return view('login');
+})->name('login.admin');
 
-Route::get('/{any}', function () {
+Route::post('/login','LoginControllers@login')->name('admin.login');
+
+Route::get('/admin', function () {
     return view('app');
-})->where('any', '.*');
+})->name('admin.ok');
