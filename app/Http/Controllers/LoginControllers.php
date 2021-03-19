@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use MongoDB\Driver\Session;
 
 class LoginControllers extends Controller
 {
@@ -26,10 +27,14 @@ class LoginControllers extends Controller
                     ->join('utilisateurs','utilisateurs.matricule','=','sps.matricule')
                     ->where('sps.matricule','=',$identifiant)
                     ->select('*')->get();
+                $request->session()->put('utilisateur',$resultat);
                 return redirect()->route('admin.ok');
             }elseif ($result[0]->type_utilisateur==1){
                 Session()->flash('success','Identifiant ou Mot de Passe errone.');
+
                 return redirect()->route('login.admin');
+
+
             }
         }else{
             Session()->flash('success','Identifiant ou Mot de Passe errone.');

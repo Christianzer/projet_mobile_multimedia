@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+$util = session('utilisateur');
+?>
 <html lang="en">
 <head>
 
@@ -36,7 +39,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">SECRETAIRE PRINCIPAL<sup class="text-secondary">SP</sup></div>
             </router-link>
 
             <!-- Divider -->
@@ -113,6 +116,8 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                            <h1 class="h3 mb-0 text-gray-800 text-primary">{{$util[0]->nom}} {{$util[0]->prenoms}} </h1>
 
 
                     </ul>
